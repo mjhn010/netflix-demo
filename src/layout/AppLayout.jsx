@@ -6,13 +6,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Outlet } from 'react-router-dom';
 import {Link} from "react-router-dom"
+import logo from "../images/netflix (1).png"
 
 const AppLayout = () => {
   return (
     <div>
     <Navbar expand="lg" className="bg-body-tertiary">
     <Container  fluid>
-      <Link to="/"><img className='netflix-logo' src="https://about.netflix.com/images/logo.png"/></Link>
+      <Link to="/"><img className='netflix-logo' src={logo}/></Link>
       <Navbar.Toggle aria-controls="navbarScroll" />
       <Navbar.Collapse id="navbarScroll">
         <Nav
