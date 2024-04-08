@@ -4,6 +4,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+/* 그라데이션 백그라운드 */
 .banner::before{
     content: '';
     background:linear-gradient(to top,black,transparent);
