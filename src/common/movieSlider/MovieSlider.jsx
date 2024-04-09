@@ -6,7 +6,7 @@ const MovieSlider = ({title,movies,responsive}) => {
   return (
     <div>
       <div>
-      <h3>{title}</h3>
+      <h3 style={{color:"#e5e5e5"}}>{title}</h3>
       <Carousel
         infinite={true}
         centerMode={true}
