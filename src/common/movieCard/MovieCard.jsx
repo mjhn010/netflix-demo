@@ -7,11 +7,11 @@ const MovieCard = ({movie}) => {
 
   const {data:genreData} = useMovieGenreQuery()
   const showGenre = (genreIdList) =>{
-    //장르 아이디가 없으면 빈값을 보여준다.
-    if(!genreIdList) return []
+    //장르데이터가 도착하지않으면 빈값 리턴.
+    if(!genreData) return []
     // 매개변수받은 값을 맵함수를 이용해서 전체를 뽑아준다. 
     // useMovieGenreQuery hook을 이용한 데이터에서 find함수를 이용해 같은 id 찾기.
-    // genreObj에 담아 name 값을 genrnNameList에 담아 리턴
+    // genreObj에 담아 name 값을 genreNameList에 담아 리턴
     const genreNameList = genreIdList.map((id)=>{
       const genreObj = genreData.find((genre)=>genre.id === id)
       return genreObj.name
