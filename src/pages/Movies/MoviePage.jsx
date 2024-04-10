@@ -52,7 +52,7 @@ const MoviePage = () => {
       <ReactPaginate
         nextLabel={<FiChevronRight/>}
         onPageChange={handlePageClick}
-        pageRangeDisplayed={data?.total_pages}
+        pageRangeDisplayed={5}
         marginPagesDisplayed={2}
         pageCount={data?.total_pages}
         previousLabel={<FiChevronLeft/>}
