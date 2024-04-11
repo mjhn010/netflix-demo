@@ -6,6 +6,7 @@ import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
 const MovieCard = ({movie}) => {
 
   const {data:genreData} = useMovieGenreQuery()
+  console.log("ggg",genreData)
   const showGenre = (genreIdList) =>{
     //장르데이터가 도착하지않으면 빈값 리턴.
     if(!genreData) return []

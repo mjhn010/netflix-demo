@@ -3,7 +3,7 @@ import api from "../utils/api"
 
 export const useMovieGenreQuery = () =>{
     const fetchUseMovieGenre = () =>{
-       return api.get("/genre/movie/list")
+       return api.get("/genre/movie/list?language=ko")
     }
     return useQuery({
         queryKey:["movie-genre"],
