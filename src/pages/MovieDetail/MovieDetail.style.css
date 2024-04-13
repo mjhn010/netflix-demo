@@ -19,7 +19,7 @@
     height: 60vh;
     width: 100%;
 }
-.banner-text-area{
+/* .banner-text-area{
     width: 36%;
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@
     top: -5%;
     color: #fff;
     position: absolute;
-}
+} */
 .video-btn{
     width: 30%;
     border: none;
