@@ -2,11 +2,14 @@ import React from "react";
 import { Badge } from "react-bootstrap";
 import "./movieCard.style.css"
 import { useMovieGenreQuery } from "../../hooks/useMovieGenre";
+import { useNavigate } from "react-router-dom";
 
 const MovieCard = ({movie}) => {
 
   const {data:genreData} = useMovieGenreQuery()
-  console.log("ggg",genreData)
+  // console.log("ggg",genreData)
+  const navigate = useNavigate()
+
   const showGenre = (genreIdList) =>{
     //장르데이터가 도착하지않으면 빈값 리턴.
     if(!genreData) return []
@@ -19,6 +22,10 @@ const MovieCard = ({movie}) => {
     })
     return genreNameList
   }
+
+  const getMovieDetail = (id)=>{
+    navigate(`/movies/${id}`)
+  }
   return (
     <div
       style={{
@@ -29,7 +36,7 @@ const MovieCard = ({movie}) => {
       }}
       className="movie-card"
     >
-      <div className="overlay">
+      <div onClick={()=>getMovieDetail(movie?.id)} className="overlay">
         <h1>{movie.title}</h1>
         {/*데이터 장르 아이디값을 쇼장르함수에 매개변수로 받는다 쇼장르함수 실행  */}
         {showGenre(movie.genre_ids).map((genre,index)=>(<Badge bg="danger" key={index}>{genre}</Badge>))}

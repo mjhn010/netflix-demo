@@ -3,9 +3,9 @@ import { usePopularMoviesQuery } from "../../../../hooks/usepopularMovies";
 import Alert from "react-bootstrap/Alert";
 import "./Banner.style.css"
 
-const Banner = () => {
+const Banner = ({id}) => {
   const { data, isLoading, isError, error } = usePopularMoviesQuery();
-  console.log("ddd", data);
+  
   if (isLoading) {
     return <h1>Loading</h1>;
   }

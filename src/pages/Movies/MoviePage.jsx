@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSearchMovie } from "../../hooks/useSearchMovie";
 import { useSearchParams } from "react-router-dom";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Col, Container, Form, Row, Spinner } from "react-bootstrap";
 import Alert from "react-bootstrap/Alert";
 import MovieCard from "../../common/movieCard/MovieCard";
 import ReactPaginate from "react-paginate";
@@ -24,9 +24,10 @@ const MoviePage = () => {
   const keyword = query.get("q");
   const [data, setData] = useState(null);
   const [active, setActive] = useState("");
-  // const [genre, setGenre] = useState(null);
-  const [sort, setSort] = useState([])
+  const [genre, setGenre] = useState(null);
+  const [sortChange, setSortChange] = useState("")
   const [filterData, SetFilterData] = useState([]);
+  let sortCheck = useRef(false)
   const handlePageClick = ({ selected }) => {
     setPage(selected + 1);
   };
@@ -38,42 +39,7 @@ const MoviePage = () => {
   } = useSearchMovie({ keyword, page });
   const { data: genreData } = useMovieGenreQuery();
   console.log("ddd", data);
-  useEffect(() => {
-    if (searchData) {
-      setData(searchData);
-    }
-  }, [searchData]);
-  useEffect(() => {
-    SetFilterData(data?.results);
-  }, [data]);
-  // useEffect(() => {
-  //   if (genre) {
-  //     filterMovie();
-  //   }
-  // }, [genre]);
-  // useEffect(()=>{
-  //   if(sort){
-  //     selectGenreHandler()
-     
-  //   }
-    
-  // },[sort])
-  if (isLoading) {
-    return (
-      <div className="spinner-area">
-        <Spinner
-          animation="border"
-          variant="danger"
-          style={{ width: "5rem", height: "5rem" }}
-        />
-      </div>
-    );
-  }
-  if (isError) {
-    return <Alert variant="danger">{error.message}</Alert>;
-  }
 
-  //
   // const filterMovie = () => {
   //   const filterMovie = data.results?.filter((movie) => {
   //     return movie.genre_ids.includes(genre.id);
@@ -90,12 +56,42 @@ const MoviePage = () => {
     setActive(item);
     SetFilterData(filterGenreMovie);
   };
-  const sortMovieHandler = () =>{
-    const sortMovie = data.results.map((movie)=>{
-      console.log(movie.popularity)
-      return setSort(movie.popularity) 
+  const sortHandler = (sortChange) =>{
+    setSortChange(sortChange)
+  }
+  if(sortChange){
+    filterData.sort((a,b)=>{
+      if(sortChange === "인기많은순"){
+        return b.popularity - a.popularity
+      }else{        
+        return a.popularity - b.popularity
+      }
     })
-    // setData({...data,results:sortMovie})
+  }
+
+  useEffect(() => {
+    if (searchData) {
+      setData(searchData);
+    }
+  }, [searchData]);
+  useEffect(() => {
+    if(data){
+      SetFilterData(data?.results);
+    }
+  }, [data]);
+  if (isLoading) {
+    return (
+      <div className="spinner-area">
+        <Spinner
+          animation="border"
+          variant="danger"
+          style={{ width: "5rem", height: "5rem" }}
+        />
+      </div>
+    );
+  }
+  if (isError) {
+    return <Alert variant="danger">{error.message}</Alert>;
   }
   return (
     <Container>
@@ -103,7 +99,7 @@ const MoviePage = () => {
         {/* <div className="sort">
           <button className="sort-btn">정렬기준</button>
         </div> */}
-        <div className="genre">
+        <div className="genre-text">
           {genreData?.map((item, index) => (
             <button
               className={`genre-btn ${item === active ? "active-color" : ""}`}
@@ -117,18 +113,17 @@ const MoviePage = () => {
           ))}
         </div>
       </div>
-      {/* <Row>
-        <Col lg={4} xs={12}></Col>
-        <Col lg={8} xs={12}>
-          <Row>
-          
-          </Row>
-        </Col>
-      </Row> */}
-        <div>
-        <button onClick={()=>sortMovieHandler()}>인기많은순</button>
-        <button>인기적은순</button>
-      </div>
+        {/* <div className="input-box">
+          <div className={`d-none ${sortCheck ? "sort-check" : ""}`} ref={sortCheck}>asd</div>
+        <input className={`input-btn`} type="button" value="인기많은순" onClick={(e)=>sortHandler(e.target.value)}/>
+        <div>ddd</div>
+        <input className={`input-btn`} type="button" value="인기적은순" onClick={(e)=>sortHandler(e.target.value)}/>
+      </div> */}
+      <Form.Select className="sort-box" onChange={(e)=>sortHandler(e.target.value)} aria-label="Default select example">
+      <option>정렬기준</option>
+      <option value="인기많은순">인기많은순</option>
+      <option value="인기적은순">인기적은순</option>
+      </Form.Select>
       <div className="flex-box">
         {filterData?.map((movie, index) => (
           <div className="card-box" key={index}>
