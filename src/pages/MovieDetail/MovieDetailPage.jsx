@@ -12,6 +12,7 @@ import like from "../../images/like.png"
 
 import MovieDetailModal from "./modal/MovieDetailModal";
 import Recommend from "./Recommend";
+import Review from "./Review";
 
 const MovieDetailPage = () => {
   const { id } = useParams();
@@ -83,8 +84,13 @@ const MovieDetailPage = () => {
           </div>
           </div>
         </div>
+        <div className="m-t-5">
         <Recommend/>
-        {/* <YouTube videoId={VideoData&&VideoData[1]?.key}  opts={opts} onReady={(e)=>onReady(e)} />; */}
+        </div>
+        <div className="m-t-5">
+          <h3 className="review-color">Review</h3>
+        <Review/>
+        </div>
       </Container>
     </div>
   );

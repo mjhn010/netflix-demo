@@ -20,18 +20,30 @@
 .modal-box{
     width: 100%;
 }
-.modal{
+/* .modal{
     --bs-modal-width:60% !important 
+} */
+.modal-dialog{
+    max-width: 70% !important; 
+    margin-right: none !important;
+    margin-left: none !important;
 }
 .modal-body{
     padding: 0 !important;
+
 }
 .modal-header{
     background-color: #000 !important;
     
     border: none !important;
 }
-
+@media(max-width:800px){
+    .modal-dialog{
+        max-width: 90% !important; 
+        margin-right: none !important;
+        margin-left: none !important;
+    }
+}
 /* .btn-close{
     --bs-btn-close-focus-shadow:0 0 0 0.25rem #0d6efd40 !important;
     background: #0000 var(--bs-btn-close-bg) center/1em auto no-repeat !important;

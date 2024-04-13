@@ -94,7 +94,7 @@ const MoviePage = () => {
     return <Alert variant="danger">{error.message}</Alert>;
   }
   return (
-    <Container>
+    <Container className="page-wrap">
       <div className="sort-genre-box">
         {/* <div className="sort">
           <button className="sort-btn">정렬기준</button>
@@ -124,7 +124,7 @@ const MoviePage = () => {
       <option value="인기많은순">인기많은순</option>
       <option value="인기적은순">인기적은순</option>
       </Form.Select>
-      <div className="flex-box">
+      <div className="page-flex-box">
         {filterData?.map((movie, index) => (
           <div className="card-box" key={index}>
             <MovieCard movie={movie} />
